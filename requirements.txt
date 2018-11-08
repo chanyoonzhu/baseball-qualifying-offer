@@ -1,0 +1,2 @@
+regex==2018.2.8
+beautifulsoup4==4.6.0
