@@ -1,16 +1,33 @@
+import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 url = 'https://questionnaire-148920.appspot.com/swe/data.html'
 
 def fetch_html(url):
-
     # parse page
     html_page = urlopen(url)
-    soup = BeautifulSoup(html_page, "html.parser")
+    html = BeautifulSoup(html_page, "html.parser")
+    return html
 
-    s = soup.findAll('td')
-    
-    return s
+def fetch_salaries(html):
+    return [tag.getText() for tag in html.findAll('td', {'class': 'player-salary'})]
 
-print(fetch_html(url))
+def parse_salaries(salary_list):
+    salaries = []
+    for salary_raw in salary_list:
+        try: 
+            salaries.append(parse_int(salary_raw))
+        except:
+            pass
+    return salaries
+
+def parse_int(str):
+    num_str = re.sub(r'\D', '', str)
+    num = int(num_str)
+    return num
+
+html = fetch_html(url)
+print(fetch_salaries(html))
+# print(parse_int(''))
+
