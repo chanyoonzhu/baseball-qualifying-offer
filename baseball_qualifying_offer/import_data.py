@@ -27,7 +27,3 @@ def parse_int(str):
     num = int(num_str)
     return num
 
-html = fetch_html(url)
-print(fetch_salaries(html))
-# print(parse_int(''))
-
