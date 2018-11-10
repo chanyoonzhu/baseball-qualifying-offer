@@ -1,6 +1,7 @@
 import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from baseball_qualifying_offer.calculate_offer import *
 
 url = 'https://questionnaire-148920.appspot.com/swe/data.html'
 
