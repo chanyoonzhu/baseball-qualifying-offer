@@ -63,10 +63,3 @@ def parse_int(str):
     num_str = re.sub(r'\D', '', str)
     num = int(num_str)
     return num
-
-def contains_int(str):
-    try:
-        parse_int(str)
-        return True
-    except:
-        return False
