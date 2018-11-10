@@ -6,6 +6,7 @@ from .calculate_offer import *
 url = 'https://questionnaire-148920.appspot.com/swe/data.html'
 YEAR = '2016'
 LEVEL = 'MLB'
+RANGE = 125
 
 def fetch_html(url):
     # parse page
@@ -51,6 +52,12 @@ def fetch_table_body(table):
         if legitimateData:
             result.append(rowData) 
     return result
+
+def fetch_best(table):
+    return best_to_range(table, RANGE)
+
+def fetch_qualifying_offer(table):
+    return calc_qualifying_offer(table, RANGE)
 
 def parse_int(str):
     num_str = re.sub(r'\D', '', str)

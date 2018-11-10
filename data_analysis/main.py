@@ -8,11 +8,13 @@ def fetch_data():
     html = fetch_html(url)
     # get table
     table = fetch_table(html)
+    # get best
+    best = fetch_best(table)
     # calculate offer
-    salaries= [i for i in table[1]][1:]
-    offer = calc_qualifying_offer(salaries)
+    offer = fetch_qualifying_offer(table)
 
     data['table'] = table
+    data['best'] = best
     data['offer'] = offer
     data['year'] = YEAR
     data['level'] = LEVEL

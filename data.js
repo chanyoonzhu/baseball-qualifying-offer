@@ -15,16 +15,42 @@ $(function() {
 
     function renderGraph (salaryObj) {
         google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
+        google.charts.setOnLoadCallback(drawChart1);
+        function drawChart1() {
+            // params
+            var year = salaryObj['year']
+            var level = salaryObj['level']
+
             var data = google.visualization.arrayToDataTable(salaryObj['table']);
 
             var options = {
-            title: 'Lengths of dinosaurs, in meters',
+            title: year + ' ' + level + ' Salaries',
+            titleTextStyle: {color: '#E81828'},
             legend: { position: 'none' },
+            color: '#284898',
+            hAxis: { gridlines: {color: '#E81828'}},
             };
 
-            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+            var chart = new google.visualization.Histogram(document.getElementById('chart1_div'));
+            chart.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+            // params
+            var year = salaryObj['year']
+            var level = salaryObj['level']
+
+            var data = google.visualization.arrayToDataTable(salaryObj['best']);
+
+            var options = {
+            title: year + ' ' + level + ' Best ' + (salaryObj['best'].length - 1) + ' Salaries',
+            titleTextStyle: {color: '#E81828'},
+            legend: { position: 'none' },
+            color: '#284898',
+            };
+
+            var chart = new google.visualization.Histogram(document.getElementById('chart2_div'));
             chart.draw(data, options);
         }
     }

@@ -1,9 +1,15 @@
-def avg_best125(nums):
-    if len(nums) >= 125:
-        avg = sum(sorted(nums, reverse=True)[:125]) / 125
-    else:
-        avg = sum(sorted(nums, reverse=True)) / len(nums)
-    return avg
+def avg_salary(salaries):
+    return sum(salaries) / len(salaries)
 
-def calc_qualifying_offer(salaries):
-    return round(avg_best125(salaries),2)
+def best_to_range(table, limit):
+    rows = table[1:]
+    ordered = sorted(rows, reverse=True, key=lambda x: x[1])
+    if len(ordered) >= limit:
+        return [table[0]] + ordered[:limit]
+    else:
+        return [table[0]] + ordered
+        
+def calc_qualifying_offer(table, limit):
+    best = best_to_range(table, limit)
+    salaries = [i for i in table[1]][1:]
+    return round(avg_salary(salaries),2)
