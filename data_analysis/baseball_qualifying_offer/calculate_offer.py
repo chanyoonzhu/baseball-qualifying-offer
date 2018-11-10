@@ -11,5 +11,5 @@ def best_to_range(table, limit):
         
 def calc_qualifying_offer(table, limit):
     best = best_to_range(table, limit)
-    salaries = [i for i in table[1]][1:]
-    return round(avg_salary(salaries),2)
+    salaries = [i[1] for i in best][1:]
+    return round(avg_salary(salaries), 2)
