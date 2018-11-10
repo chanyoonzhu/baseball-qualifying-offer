@@ -1,9 +1,11 @@
 import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from baseball_qualifying_offer.calculate_offer import *
+from .calculate_offer import *
 
 url = 'https://questionnaire-148920.appspot.com/swe/data.html'
+YEAR = '2016'
+LEVEL = 'MLB'
 
 def fetch_html(url):
     # parse page
@@ -11,20 +13,53 @@ def fetch_html(url):
     html = BeautifulSoup(html_page, "html.parser")
     return html
 
-def fetch_salaries(html):
-    return [tag.getText() for tag in html.findAll('td', {'class': 'player-salary'})]
+def fetch_table(html):
+    result = []
+    table = html.find('table')
+    result += fetch_table_head(table)
+    result += fetch_table_body(table)
+    return result
 
-def parse_salaries(salary_list):
-    salaries = []
-    for salary_raw in salary_list:
-        try: 
-            salaries.append(parse_int(salary_raw))
-        except:
-            pass
-    return salaries
+def fetch_table_head(table):
+    result = []
+    head = table.find('thead')
+    result.append([])
+    allcols = head.findAll('th')
+    result[0].append(allcols[0].getText())
+    result[0].append(allcols[1].getText())
+    return result
+
+def fetch_table_body(table):
+    result = []
+    rows = table.find('tbody').findAll('tr')
+    for row in rows:
+        rowData = []
+        allcols = row.findAll('td')
+        legitimateData = True
+        for col in allcols:
+            if col['class'][0] == 'player-salary':
+                try: 
+                    rowData.append(parse_int(col.getText()))
+                except:
+                    legitimateData = False
+            elif col['class'][0] == 'player-name':
+                rowData.append(col.getText())
+            # data validation
+            if (col['class'][0] == 'player-year' and col.getText() != YEAR or 
+                col['class'][0] == 'player-level' and col.getText() != LEVEL):
+                    legitimateData = False
+        if legitimateData:
+            result.append(rowData) 
+    return result
 
 def parse_int(str):
     num_str = re.sub(r'\D', '', str)
     num = int(num_str)
     return num
 
+def contains_int(str):
+    try:
+        parse_int(str)
+        return True
+    except:
+        return False

@@ -1,7 +1,6 @@
 import pytest
 from baseball_qualifying_offer.import_data import fetch_html
 from baseball_qualifying_offer.import_data import parse_int
-from baseball_qualifying_offer.import_data import parse_salaries
 
 # fetch_html tests
 url = 'https://questionnaire-148920.appspot.com/swe/data.html'
@@ -43,11 +42,3 @@ def test_f2_5 ():
         assert False
     except ValueError:
         assert True
-
-# fetch_salaries test
-def f3 (s_list):
-    return parse_salaries(s_list)
-
-def test_f3 ():
-    s_list = ['$24,000,000', '$987,500', '','$4,500,000', '$507,500', '$507,500', 'no salary data', '$$$507,500']
-    assert f3(s_list) == [24000000, 987500, 4500000, 507500, 507500, 507500]
