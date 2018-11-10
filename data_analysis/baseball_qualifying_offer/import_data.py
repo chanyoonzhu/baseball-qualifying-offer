@@ -57,9 +57,13 @@ def fetch_best(table):
     return best_to_range(table, RANGE)
 
 def fetch_qualifying_offer(table):
-    return calc_qualifying_offer(table, RANGE)
+    amount = calc_qualifying_offer(table, RANGE)
+    return format_currency(amount)
 
 def parse_int(str):
     num_str = re.sub(r'\D', '', str)
     num = int(num_str)
     return num
+
+def format_currency(val):
+    return '${:,}'.format(val)

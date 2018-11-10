@@ -5,7 +5,8 @@ $(function() {
         url: "http://127.0.0.1:5000/",
         dataType: 'jsonp',
         success: function(response){
-            console.log(response);
+            $offer = $('#offer');
+            $offer.text(response['offer']);
             renderGraph(response);
         },
         error: function(result){

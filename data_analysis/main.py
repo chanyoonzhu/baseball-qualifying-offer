@@ -13,6 +13,7 @@ def fetch_data():
     # calculate offer
     offer = fetch_qualifying_offer(table)
 
+    # assemble data
     data['table'] = table
     data['best'] = best
     data['offer'] = offer
