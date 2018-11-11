@@ -2,7 +2,7 @@ $(function() {
     // load data
     $.ajax({
         type: 'GET',
-        url: "http://127.0.0.1:5000/fetch",
+        url: "https://mla-offer-api-heroku.herokuapp.com/fetch",
         dataType: 'jsonp',
         success: function(response){
             $offer = $('#offer');
