@@ -49,7 +49,7 @@ $(function() {
             var data = google.visualization.arrayToDataTable(salaryObj['best']);
 
             var options = {
-                title: year + ' ' + level + (salaryObj['best'].length - 1) + ' Highest ' + ' Salaries',
+                title: year + ' ' + level + ' ' + (salaryObj['best'].length - 1) + ' Highest ' + ' Salaries',
                 titleTextStyle: {color: '#E81828'},
                 hAxis: { textPosition: 'none' },
                 legend: { position: 'none' },
