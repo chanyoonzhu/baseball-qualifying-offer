@@ -82,3 +82,7 @@ p {
     color: #E81828
 }
 
+#error {
+    display: none;
+}
+

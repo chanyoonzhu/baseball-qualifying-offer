@@ -5,7 +5,6 @@ $(function() {
         url: "https://mla-offer-api-heroku.herokuapp.com/fetch",
         dataType: 'jsonp',
         success: function(response){
-            console.log(response)
             $title = $('#offer-title');
             $offer = $('#offer');
             $title.text('Qualifying Offer Value');
@@ -13,7 +12,9 @@ $(function() {
             renderGraph(response);
         },
         error: function(result){
-            console.log("Error");
+            $error = $('#error');
+            $error.text('A problem occurred while fetching the data. Please try reload this page later.')
+                .show();
         }
     })
 

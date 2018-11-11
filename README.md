@@ -15,6 +15,9 @@ It also visualizes the salaries from the past season using Google charts.
     python data_analysis/setup.py pytest
 ### References:
 [Deploying Flask to Heroku](https://www.youtube.com/watch?v=pmRT8QQLIqk)
+
 [Flask render_template()](https://stackoverflow.com/questions/10810206/flask-render-template-returning-nameerror-name-app-is-not-defined)
+
+[Flask app error handling](https://damyanon.net/post/flask-series-logging/)
 
     
