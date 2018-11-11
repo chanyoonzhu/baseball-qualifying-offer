@@ -60,6 +60,9 @@ def fetch_qualifying_offer(table):
     amount = calc_qualifying_offer(table, RANGE)
     return format_currency(amount)
 
+def fetch_close_offers(best, offer):
+    return find_close_offers(best, parse_int(offer))
+
 def parse_int(str):
     num_str = re.sub(r'\D', '', str)
     num = int(num_str)

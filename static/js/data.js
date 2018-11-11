@@ -5,7 +5,10 @@ $(function() {
         url: "https://mla-offer-api-heroku.herokuapp.com/fetch",
         dataType: 'jsonp',
         success: function(response){
+            console.log(response)
+            $title = $('#offer-title');
             $offer = $('#offer');
+            $title.text('Qualifying Offer Value');
             $offer.text(response['offer']);
             renderGraph(response);
         },
@@ -45,13 +48,31 @@ $(function() {
             var data = google.visualization.arrayToDataTable(salaryObj['best']);
 
             var options = {
-            title: year + ' ' + level + ' Best ' + (salaryObj['best'].length - 1) + ' Salaries',
+            title: year + ' ' + level + ' Top ' + (salaryObj['best'].length - 1) + ' Salaries',
+            titleTextStyle: {color: '#E81828'},
+            hAxis: { textPosition: 'none' },
+            legend: { position: 'none' },
+            color: '#284898',
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart2_div'));
+            chart.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChart3);
+        function drawChart3() {
+
+            var neighbors = salaryObj['neighbors'];
+            var data = google.visualization.arrayToDataTable(neighbors);
+
+            var options = {
+            title: 'Salaries Close to Qualifying Offer',
             titleTextStyle: {color: '#E81828'},
             legend: { position: 'none' },
             color: '#284898',
             };
 
-            var chart = new google.visualization.Histogram(document.getElementById('chart2_div'));
+            var chart = new google.visualization.BarChart(document.getElementById('chart3_div'));
             chart.draw(data, options);
         }
     }

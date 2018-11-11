@@ -12,6 +12,8 @@ def fetch_data():
     best = fetch_best(table)
     # calculate offer
     offer = fetch_qualifying_offer(table)
+    # get players whose salaries are close to the offer
+    neignbors = fetch_close_offers(best, offer)
 
     # assemble data
     data['table'] = table
@@ -19,6 +21,7 @@ def fetch_data():
     data['offer'] = offer
     data['year'] = YEAR
     data['level'] = LEVEL
+    data['neighbors'] = neignbors
     
     return json.dumps(data)
  
